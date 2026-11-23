@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+:root {
+  --resonar-cream: #f1e4ce;
+  --resonar-magenta: #bc195c;
+  --resonar-magenta-light: #c92e6e;
+  --resonar-gold: #f9c958;
+  --resonar-ink: #18181b;
+  --resonar-muted: #71717b;
+  --resonar-subtle: #9f9fa9;
+}
+
+@theme inline {
+  --color-background: var(--resonar-cream);
+  --color-foreground: var(--resonar-ink);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-nunito);
+}
+
+html,
+body {
+  background-color: #18181b;
+  color: var(--resonar-ink);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 480px) {
+  html,
+  body {
+    background-color: var(--resonar-cream);
+  }
+}
+
+@keyframes eq-bar {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.animate-eq-bar {
+  animation: eq-bar 0.9s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+@keyframes lab-wave {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 0.95;
+  }
+}
+
+.animate-lab-wave {
+  animation: lab-wave 1.1s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Brand-consistent native range slider (modern-web-guidance: slider) */
+input[type="range"].resonar-slider {
+  --slider-track-size: 6px;
+  --slider-thumb-size: 14px;
+  --slider-track-radius: 999px;
+  --slider-thumb-radius: 50%;
+  --slider-track-color: rgba(0, 0, 0, 0.1);
+  --slider-fill-color: #bc195c;
+  --slider-thumb-color: #bc195c;
+  --slider-direction: to right;
+  --attr-min: 0;
+  --attr-max: 100;
+  --control-value: 0;
+  --slider-progress: calc(
+    (var(--control-value) - var(--attr-min)) /
+      max(1, (var(--attr-max) - var(--attr-min))) * 100%
+  );
+
+  appearance: none;
+  -webkit-appearance: none;
+  inline-size: 100%;
+  block-size: 28px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"].resonar-slider:focus-visible {
+  outline: 2px solid var(--slider-fill-color);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+input[type="range"].resonar-slider::-webkit-slider-runnable-track {
+  block-size: var(--slider-track-size);
+  border: 0;
+  border-radius: var(--slider-track-radius);
+  background: linear-gradient(
+    var(--slider-direction),
+    var(--slider-fill-color) var(--slider-progress),
+    var(--slider-track-color) var(--slider-progress)
+  );
+}
+
+input[type="range"].resonar-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  inline-size: var(--slider-thumb-size);
+  block-size: var(--slider-thumb-size);
+  margin-block-start: calc(
+    (var(--slider-track-size) - var(--slider-thumb-size)) / 2
+  );
+  border: 0;
+  border-radius: var(--slider-thumb-radius);
+  background: var(--slider-thumb-color);
+  box-shadow: 0 1px 4px rgba(188, 25, 92, 0.35);
+}
+
+input[type="range"].resonar-slider::-moz-range-track {
+  block-size: var(--slider-track-size);
+  border: 0;
+  border-radius: var(--slider-track-radius);
+  background: var(--slider-track-color);
+}
+
+input[type="range"].resonar-slider::-moz-range-progress {
+  block-size: var(--slider-track-size);
+  border-radius: var(--slider-track-radius);
+  background: var(--slider-fill-color);
+}
+
+input[type="range"].resonar-slider::-moz-range-thumb {
+  inline-size: var(--slider-thumb-size);
+  block-size: var(--slider-thumb-size);
+  border: 0;
+  border-radius: var(--slider-thumb-radius);
+  background: var(--slider-thumb-color);
+}
